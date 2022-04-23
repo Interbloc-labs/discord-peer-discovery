@@ -14,8 +14,6 @@ load_dotenv()
 
 webhook = os.getenv("WEBHOOK")
 rpc = os.getenv("BASE_RPC")
-print(rpc)
-exit()
 logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.INFO)
 tmp = []
 rpcs = []
