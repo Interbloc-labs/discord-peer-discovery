@@ -61,7 +61,6 @@ def parse_connections_for_node(node):
 
         if not is_ip_private(rpc[0]):
             if f"http://{ip}:{rpc[1]}" not in rpcs:
-                logging.info(f"Adding http://{ip}:{rpc[1]} to the tmp list")
                 tmp.append(f"http://{ip}:{rpc[1]}")
 
     rs = (grequests.get(u, timeout=5) for u in tmp)
@@ -71,9 +70,7 @@ def parse_connections_for_node(node):
             if response.url not in rpcs:
                 logging.info(f"Starting Lookup for {response.url}")
                 rpcs.append(response.url)
-                logging.info(f"Parsed RPCs: {', '.join(rpcs)}")
                 parse_connections_for_node(response.url)
-                logging.info(f"Finished Lookup for {response.url}")
 
 
 def send_rpcs_to_discord():
@@ -101,3 +98,4 @@ if __name__ == "__main__":
     parse_connections_for_node(rpc)
     send_rpcs_to_discord()
     send_peers_to_discord()
+    logging.info("Done")
